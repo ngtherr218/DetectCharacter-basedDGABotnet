@@ -10,10 +10,7 @@ from collections import Counter
 # Hàm trích xuất domain từ URL
 def extract_domain(url):
     parsed_url = urlparse(url)
-    
-    st.write(f"parsed_url: {parsed_url}")
-
-    return parsed_url.netloc
+    return parsed_url.netloc.rsplit('.', 1)[0] if len(parsed_url.netloc.rsplit('.', 1)) > 1 else parsed_url.netloc
 
 # Các hàm đặc trưng (đảm bảo rằng các hàm này đã được định nghĩa đầy đủ)
 #Hàm trả vể entropy của tên miền
@@ -120,7 +117,7 @@ def avg_trigram(domain):
     return common_trigram/amount_trigram
 
 # Tải mô hình đã lưu
-model = joblib.load('random_forest_model.pkl')
+model = joblib.load('rf_model.pkl')
 
 
 # Tiêu đề của ứng dụng
